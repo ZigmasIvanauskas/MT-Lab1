@@ -1,38 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset=utf-8 />
-<title>videojs-contrib-hls embed</title>
+<meta charset=utf-8/>
+<title>Lab 1. Introduction to HTML5 and HLS</title>
   
-  <!--
+	
+	   <script src="js/video.js"></script>
+  	   <script src="js/videojs-http-streaming.js"></script>
+	
+	<link href="css/video-js.css" rel="stylesheet">
 
-  Uses the latest versions of video.js and videojs-http-streaming.
-
-  To use specific versions, please change the URLs to the form:
-
-  <link href="https://unpkg.com/video.js@6.7.1/dist/video-js.css" rel="stylesheet">
-  <script src="https://unpkg.com/video.js@6.7.1/dist/video.js"></script>
-  <script src="https://unpkg.com/@videojs/http-streaming@0.9.0/dist/videojs-http-streaming.js"></script>
-
-  -->
-
-  <link href="https://unpkg.com/video.js/dist/video-js.css" rel="stylesheet">
 </head>
 <body>
-
-
-	  
-  <h1>Video.js Example Embed</h1>
-
-  <video-js id="my_video_1" class="vjs-default-skin" controls preload="auto" width="640" height="268">
-    <source src=" https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8" type="application/x-mpegURL">
-  </video-js>
+  <h1>Mano pirmasis HLS vaizdo grotuvas</h1>
   
-  <script src="https://unpkg.com/video.js/dist/video.js"></script>
-  <script src="https://unpkg.com/@videojs/http-streaming/dist/videojs-http-streaming.js"></script>
   
-  <script>
+	<button type="button" onclick="togglePlay()">Groti</button>
+	<button type="button" onclick="togglePause()">||</button>
+	<button type="button" onclick="toggleStop()">Stop</button>
+	<button type="button" onclick="toggleJump5()">+5s</button>
+	<button type="button" onclick="toggleBack5()">-5s</button>	
+	
+	
+	<video-js id="my_video_1" class="vjs-default-skin" controls preload="auto" width="640" height="268">
+    	<source id="video1" src="https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8" type="application/x-mpegURL">
+	</video-js>
+		
+	<script>
     var player = videojs('my_video_1');
+  	</script>
+	
+	
+   <script>
+
+    var url_input = document.getElementById('input');
+    var vid = document.getElementById('video1');
+    var sp = document.getElementById('myspan');
+
+    url_input.onkeyup = function(e){
+       vid.src = url_input.value;
+       sp.src = url_input.value;
+       
+    }
+  </script>
+   <script>
+<!-- Aprasomi valdymu mygtukai:play, pause, stop, jump to 5 sec forward, jump to 5 sec backwards
+-->
+  var myPlayer = videojs("my_video_1");
+  var whereYouAt = myPlayer.currentTime()
+  
+	togglePlay = function(){
+    myPlayer.play();
+	}
+	
+	togglePause = function(){
+    myPlayer.pause();
+	}
+	
+	toggleJump5 = function(){
+	myPlayer.currentTime(myPlayer.currentTime()+5)
+	}
+	
+	toggleBack5 = function(){
+	myPlayer.currentTime(myPlayer.currentTime()-5)
+	}
+	
+	toggleStop = function(){
+	myPlayer.currentTime(0)
+    myPlayer.pause();
+	}
   </script>
   
 </body>
